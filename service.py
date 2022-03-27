@@ -15,10 +15,10 @@ for i in range(30):
         # connect to local DB
         try:
             db = mariadb.connect(
-                user = "unej",
+                user     = "unej",
                 password = "unejblackbox",
-                host = "localhost",
-                port = 3306,
+                host     = "localhost",
+                port     = 3306,
                 database = "blackbox"
             )
         # error handler of local DB
