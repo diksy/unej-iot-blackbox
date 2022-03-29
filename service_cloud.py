@@ -2,7 +2,7 @@ import os
 import requests
 import json
 import mariadb
-API      = "http://192.168.1.3:8888/unej-blackbox/public/api"
+API      = "http://192.168.10.63:8888/unej-blackbox/public/api"
 email    = "diksy@unej.ac.id"
 password = "secretxx"
 
@@ -46,8 +46,11 @@ except mariadb.Error as edb:
 dht = []
 for (id, temperature, humidity, created_at) in sql:
     try:
-        requests.post(API + "/dht", data={ "temperature": temperature, "humidity": humidity, "created_at": created_at }, headers={ "Authorization": token })
-        dht.append(id)
+        response = requests.post(API + "/dht", data={ "temperature": temperature, "humidity": humidity, "created_at": created_at }, headers={ "Authorization": token })
+        if response.status_code == 401:
+            os.remove("token.txt")
+        else:
+            dht.append(id)
     except Exception as e:
         print(f"Upload failed for data {created_at}.")
 

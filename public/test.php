@@ -59,7 +59,7 @@
                 $("form button[type=submit]").html("<i class='fas fa-paper-plane me-2'></i>Submit");
                 $("form fieldset").removeAttr("disabled");
             } else {
-                $.post("http://192.168.1.3:8888/unej-blackbox/public/api/signin", { email: "diksy@unej.ac.id", password: "secretxx" }, function (response) {
+                $.post("http://192.168.10.113/iot/public/api/signin", { email: "diksy@unej.ac.id", password: "secretxx" }, function (response) {
                     localStorage.setItem("authorization", response.authorization);
                     $.ajaxSetup({
                         headers: {
@@ -78,7 +78,7 @@
                 var data = $(this).serialize();
                 $(this).find("fieldset").attr("disabled", "disabled");
                 $(this).find("button[type=submit]").html("<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span> Loading...");
-                $.post("http://192.168.1.3:8888/unej-blackbox/public/api/dht", data, function (response) {
+                $.post("http://192.168.10.113/iot/public/api/dht", data, function (response) {
                     $("form").prepend("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Success!</strong> Data has been added successfully.<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
                     $("form button[type=submit]").html("<i class='fas fa-check me-2'></i>Success");
                 }).fail(function (xhr, status, error) {
